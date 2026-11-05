@@ -8,8 +8,8 @@ python3 -m venv .venv && .venv/bin/pip install -e '.[dev]'
 .venv/bin/hexapod --dry-run serve
 ```
 
-The tests and the dry run need no hardware. CI runs the tests on Python 3.9,
-3.11 and 3.13.
+The tests and the dry run need no hardware. CI runs the tests on Python 3.11
+(Raspberry Pi OS Bookworm) and 3.13 (Trixie). 3.9 still passes locally.
 
 ## What a change needs
 
