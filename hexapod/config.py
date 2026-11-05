@@ -43,7 +43,7 @@ class LegConfig:
 
 @dataclass(frozen=True)
 class Shell:
-    """Printed body stack, mm. From Chica frame.stl / top-cover4 and body_v5."""
+    """Printed body stack, mm. From Chica frame.stl / top-cover4 and assets/print-me/body."""
 
     floor_xy: Tuple[float, float]
     chamfer: float

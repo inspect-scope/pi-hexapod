@@ -64,8 +64,8 @@ before you rely on it; this one passed a casual look.
 If you do fit a hub, feed its VCC from Pi pin 1 (3V3), not a 5 V pin. It
 passes straight through to all four sockets.
 
-The body's `body_v3` floor 2 still has a 20 × 40 pocket for the hub at
-`(52, 45)`. Unused for now; leave it or reclaim it on the next print.
+The v3 body's floor 2 had a 20 × 40 pocket for the hub at `(52, 45)`. The
+current body in [assets/print-me/body/](../assets/print-me/body/) has none.
 
 ### `dtparam` line silently ignored
 

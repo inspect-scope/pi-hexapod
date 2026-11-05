@@ -384,13 +384,14 @@ def test_state_reports_joint_angles_and_the_pulse_frame(client):
     client.controller.board.set_torque(True)
     client.controller.stand()
     assert _wait_for(lambda: client.controller.snapshot().state == "standing")
-    assert _wait_for(lambda: abs(client.controller.snapshot().height - 80) < 0.5, seconds=3.0)
+    ride = client.controller.config.stance.ride_height
+    assert _wait_for(lambda: abs(client.controller.snapshot().height - ride) < 0.5, seconds=5.0)
 
     body = client.get("/api/state").json()
     cfg = client.get("/api/config").json()
     for leg, angles in body["angles"].items():
-        # sit 40 -> stand 80 drops every femur by ~31.6 deg; the pulse must follow
-        assert sitting[leg] - angles["femur"] == pytest.approx(31.6, abs=0.5)
+        # sit 40 -> stand 105 drops every femur by ~50.6 deg; the pulse must follow
+        assert sitting[leg] - angles["femur"] == pytest.approx(50.6, abs=0.5)
         femur_channel = cfg["servos"][leg]["femur"]["channel"]
         assert body["pulses"][femur_channel] != before[femur_channel]
 

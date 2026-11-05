@@ -7,3 +7,4 @@ __pycache__/
 hexapod/models/*.task
 hexapod/static/vendor/mediapipe/*.task
 hexapod/static/vendor/mediapipe/wasm/*.wasm
+assets/print-me/body/assembly_preview.stl

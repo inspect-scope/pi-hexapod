@@ -52,7 +52,7 @@ limits:
   tibia_deg: [30, 148]
 
 # Printed stack. Distances from Chica frame.stl + top-cover4 and
-# assets/print-me/body_v5. Swap in caliper / protractor readings when you have them.
+# assets/print-me/body. Swap in caliper / protractor readings when you have them.
 shell:
   floor_xy: [130, 160]     # both electronics floors, mm
   chamfer: 12               # clipped corners on the floors

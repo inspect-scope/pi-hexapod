@@ -1,5 +1,5 @@
 """
-"Scope" – electronics body for the MYP Chica hexapod frame.   v3 (cable clamps, floor-1 brackets, snap-on skirt)
+pi-hexapod – electronics body for the MYP Chica hexapod frame.   v3 (cable clamps, floor-1 brackets, snap-on skirt)
 
 Coordinate system = MYP frame: origin at the frame centre, z = 0 is the top of the frame, +Y = front, +X = right.
 Parts (all print flat as exported):
@@ -18,6 +18,7 @@ Fasteners: M3 x 6 (12), M2.5 x 5 (14), M1.6 x 4 (4). Everything threads into PLA
 Edit PARAMETERS and re-run:  python3 chica_body.py
 """
 import math
+import os
 import cadquery as cq
 
 # ============================================================== PARAMETERS
@@ -136,7 +137,8 @@ PI_PORT_CUTOUT = (-56, 6, 50, 76)        # rear wall, top level: x0, x1, z0, z1 
 BATTERY_DOOR = (-26, 26, 34)             # rear wall, open to the bottom edge: x0, x1, z1 – the pack slides in and out
 VENT_Y, VENT_Z = list(range(-20, 61, 7)), (50, 75)
 J2_BUTTON = (46, 22, 12.5)               # left wall: y, z, hole Ø – 12 mm momentary pushbutton wired to the Pi 5's J2 pads
-WALL_TEXT, WALL_TEXT_SIZE, WALL_TEXT_POS = "SCOPE", 14, (10, 40)
+WALL_TEXT, WALL_TEXT_SIZE, WALL_TEXT_POS = "HEXAPOD", 14, (10, 40)
+ROOF_TEXT = "HEXAPOD"
 
 # --- camera pod (Camera Module 3 Wide) in the skirt's front wall, recessed, 15° nose-down; camera on a separate carrier
 CAM_TILT = 15
@@ -409,7 +411,7 @@ for (bx, by) in RET_BOSSES:
     roof = roof.union(boss)
 for y in (-70, -59, -48, -37):                       # vents over the rear (battery side)
     roof = slot(roof, (0, y), 40, 6, ROOF_Z, r=2.5)
-roof = engrave(roof, "SCOPE", (-50, 0), z_top=ROOF_Z + T, size=9, angle=90)
+roof = engrave(roof, ROOF_TEXT, (-50, 0), z_top=ROOF_Z + T, size=9, angle=90)
 roof = engrave(roof, "TANK PRE-SURVEY HEXAPOD", (53, 0), z_top=ROOF_Z + T, size=3.5, angle=90)
 
 # ============================================================== SCREEN RETAINER (separate print)
@@ -535,7 +537,7 @@ for hx in (-CARRIER_HOLES[0] / 2, CARRIER_HOLES[0] / 2):
         pod = pod.cut(hole)
 skirt = skirt.union(pod)
 
-for sx in (-1, 1):                                   # SCOPE on both side walls, readable from outside
+for sx in (-1, 1):                                   # WALL_TEXT on both side walls, readable from outside
     wp = cq.Workplane("YZ" if sx > 0 else "ZY").workplane(offset=out_w / 2)
     ty, tz = WALL_TEXT_POS
     txt = wp.center(ty, tz) if sx > 0 else wp.center(tz, ty)
@@ -558,7 +560,7 @@ for hx in (-CARRIER_HOLES[0] / 2, CARRIER_HOLES[0] / 2):
 car = engrave(car, "TOP", (0, CAM_H / 2 - 3), z_top=CAM_T, size=2.5)
 
 # ============================================================== EXPORT
-out = "/mnt/user-data/outputs/"
+out = os.path.dirname(os.path.abspath(__file__)) + "/"
 kw = dict(tolerance=0.05, angularTolerance=0.1)
 cq.exporters.export(f1, out + "floor1_battery_ubec.stl", **kw)
 cq.exporters.export(f2.translate((0, 0, -F2_Z)), out + "floor2_pi_servo2040.stl", **kw)

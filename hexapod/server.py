@@ -100,7 +100,7 @@ def _velocity_from(move: MoveRequest) -> Velocity:
 
 def create_app(state: RobotState, config: Config) -> FastAPI:
     controller = state.controller
-    app = FastAPI(title="scope-hexapod", docs_url=None, redoc_url=None)
+    app = FastAPI(title="pi-hexapod", docs_url=None, redoc_url=None)
     app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
     last_move: Dict[str, Any] = {"text": None}
 

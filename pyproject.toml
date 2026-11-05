@@ -1,7 +1,7 @@
 [project]
-name = "scope-hexapod"
+name = "pi-hexapod"
 version = "0.1.0"
-description = "Pi-side server and web client for a MakeYourPet hexapod, replacing the Chica Android apps"
+description = "Raspberry Pi control stack for a MakeYourPet Chica hexapod: gaits, IK, IMU, camera, hand tracking and a browser client"
 requires-python = ">=3.9"
 dependencies = [
     "pyserial>=3.5",
