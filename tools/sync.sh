@@ -4,7 +4,7 @@
 #   tools/sync.sh                            # sync only
 #   tools/sync.sh .venv/bin/hexapod check    # sync, then run that on the Pi
 #   tools/sync.sh sudo systemctl restart hexapod
-#   HEXAPOD_HOST=hexapod@192.168.11.253 tools/sync.sh
+#   HEXAPOD_HOST=hexapod@192.168.1.50 tools/sync.sh
 #
 # The Pi's .venv, .git and caches are excluded, so they survive --delete.
 set -euo pipefail
