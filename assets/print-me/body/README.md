@@ -1,6 +1,9 @@
-# Scope body – v3 (26 Sep 2026): big cable slots + clamps, floor-1 brackets, snap-on skirt, camera carrier
+# Electronics body
 
-Source of truth: `chica_body.py` (CadQuery). Edit the PARAMETERS block, run `python3 chica_body.py`, all STLs regenerate.
+A three-level enclosure that sits on MakeYourPet's `frame.stl`: battery floor, Pi floor, screen roof, and a snap-on skirt.
+
+Source of truth: `chica_body.py` (CadQuery). Edit the PARAMETERS block, run `python3 chica_body.py`, all STLs regenerate in this folder.
+`pip install cadquery` needs Python 3.12 or older. `assembly_preview.stl` is also written and is gitignored.
 Coordinates = MYP frame: origin at the frame centre, z = 0 top of frame, +Y front, +X right.
 
 ## Print list
@@ -10,8 +13,8 @@ Coordinates = MYP frame: origin at the frame centre, z = 0 top of frame, +Y fron
 | `floor2_pi_servo2040.stl` | yes | as exported |
 | `skirt_walls.stl` | yes | as exported; the 4 snap tabs are cantilevers in the wall – no supports |
 | `camera_carrier.stl` | yes, 10 min | flat, bosses up – its accuracy is why it exists |
-| `roof_screen.stl` | **only if you don't want to drill** | 3 of the 4 post holes moved. `roof_drill_template_v3.pdf` printed at 100 % marks the 3 new holes on your existing roof; the front-right hole is unchanged |
-| `screen_retainer.stl` | no | unchanged |
+| `roof_screen.stl` | yes | as exported |
+| `screen_retainer.stl` | yes | clamps the screen into the roof |
 
 Fasteners: M3 x 6 → 12 (4 roof, 4 lip, 4 floor 2). M2.5 x 5 → 14 (4 Pi, 2 IMU, 4 camera carrier, 4 spare). M1.6 x 4 → 4 (camera).
 
@@ -28,7 +31,7 @@ Fasteners: M3 x 6 → 12 (4 roof, 4 lip, 4 floor 2). M2.5 x 5 → 14 (4 Pi, 2 IM
 ## Servo2040 – why it sits where it sits
 Across the rear, x −7…55, with the **18-way header row on its front edge**, starting just right of the Pi's USB plugs.
 That is the only placement where every header is reachable from above with the roof off: anything centred on the rear puts
-the row 2 mm behind the Pi's Ethernet/USB plugs. Routing (drawn on `layout_check_floors_v3.png`):
+the row 2 mm behind the Pi's Ethernet/USB plugs. Routing (drawn on `layout_floors.png`):
 - R1–R3: out of the floor-2 clamps, 3 mm to the right half of the row, drop straight in.
 - L1–L3: out of the clamps, aft along x −59 to y −47, across the free rear-left corner (10 mm corridor behind the Ethernet plug,
   or over it), drop into the left half of the row. USB-C and the screw terminal face left into that same corner.
@@ -59,7 +62,7 @@ the row 2 mm behind the Pi's Ethernet/USB plugs. Routing (drawn on `layout_check
   for a 12 mm momentary pushbutton wired to the Pi 5's **J2** pads – the proper way to add an external power button.
 - Front wall: 14 x 6 slot at (x −33, z 57) in line with the onboard button, assuming it sits 21 mm from the GPIO edge along the
   SD edge – **measure that on your Pi**; the slot covers ±7 mm. Nothing is in front of it any more (the post is at x −58…−42).
-- Camera pod 13 deep. Wall text at z 40, SCOPE both sides.
+- Camera pod 13 deep. `WALL_TEXT` engraved at z 40 on both side walls, `ROOF_TEXT` on the roof. Both read HEXAPOD; change them to name your robot.
 
 ## Camera
 The official Camera Module 3 drawing confirms the pattern in the code (21 x 12.5, holes 2.0 / 14.5 from the top edge, Ø2.2);
